@@ -28,6 +28,15 @@ func main() {
 			// set code and body
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte("Hello World!"))
+
+			// ctx, cancel := context.WithCancel(context.Background())
+
+			// select {
+			// case <-ctx.Done():
+
+			// default:
+
+			// }
 		})
 	// run
 	if err := http.ListenAndServe(":8080", rt); err != nil {

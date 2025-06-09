@@ -2,3 +2,4 @@ go.sum
 *.env
 !env.example
 coverage.out
+tmp
