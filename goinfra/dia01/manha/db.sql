@@ -1,0 +1,17 @@
+CREATE DATABASE IF NOT EXISTS bgw7;
+USE bgw7;
+SELECT CURRENT_DATE;
+
+
+CREATE TABLE products (
+	product_id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(50)
+);
+
+INSERT INTO products VALUES (DEFAULT, 'Batata');
+
+SELECT * FROM products;
+
+INSERT INTO products(name) VALUES ('Cenoura');
+
+SELECT * FROM products;

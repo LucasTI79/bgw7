@@ -1,0 +1,57 @@
+networks:
+  bgw7_network:
+    driver: bridge
+    # driver: overlay
+    # attachable: true
+volumes:
+  mysql_data:
+  portainer_data:
+services:
+  api:
+    # image: lucasti79/minha-imagem-go
+    build: 
+      context: .
+      dockerfile: Dockerfile-go
+    container_name: bgw7-api
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
+    networks:
+      - bgw7_network
+
+  database:
+    image: mysql:9.3.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bgw7
+      MYSQL_USER: bgw7
+      MYSQL_PASSWORD: bgw7
+    volumes:
+      - ./.data:/var/lib/mysql
+      # - mysql_data:/var/lib/mysql
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.5'
+    #       memory: 512M
+    #     reservations:
+    #       cpus: '0.1'
+    #       memory: 128M
+    ports:
+      - "3306:3306"
+    networks:
+      - bgw7_network
+  portainer:
+    platform: linux/x86_64
+    image: portainer/portainer-ce
+    restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    networks:
+      - bgw7_network

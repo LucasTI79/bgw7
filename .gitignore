@@ -3,3 +3,4 @@ go.sum
 !env.example
 coverage.out
 tmp
+.data
