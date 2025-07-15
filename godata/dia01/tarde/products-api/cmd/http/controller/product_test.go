@@ -36,7 +36,7 @@ func TestGetProduct(t *testing.T) {
 			1: {Name: "product 1", Type: "type 1", Quantity: 1, Price: 1.1},
 			2: {Name: "product 2", Type: "type 2", Quantity: 2, Price: 2.2},
 		}
-		repository := product.NewMapRepository(db)
+		repository := product.NewMemoryRepository(db)
 		controller := controller.NewProductController(repository)
 
 		req := httptest.NewRequest(http.MethodGet, url, nil)
